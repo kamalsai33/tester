@@ -1,0 +1,17 @@
+# Exported from:        http://Sai_Kamal:5516/
+# Release version:      25.1.6-1102.800
+# Date created:         Wed Apr 08 12:56:35 IST 2026
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: test
+spec:
+- name: tester
+  type: xld.CliConfig
+  cliHome: D:\bakp\Deploy\Deploy-cli\xl-deploy-25.1.7-1130.800-cli\xl-deploy-25.1.7-1130.800-cli
+  xldHost: localhost
+  xldPort: "4516"
+  xldPassword: !value "xld_CliConfig_tester_xldPassword"

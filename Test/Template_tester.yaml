@@ -1,0 +1,66 @@
+# Exported from:        http://Sai_Kamal:5516/
+# Release version:      25.1.6-1102.800
+# Date created:         Wed Apr 08 12:56:35 IST 2026
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: test
+spec:
+- template: tester
+  scheduledStartDate: 2026-04-01T09:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: New task
+      type: xld.cli
+      cli: tester
+      script: |-
+        import time
+
+        TEST_BASE = "Applications/Timeout-Test-" + str(int(time.time()))
+
+        def createCi(path, ciType, props={}):
+            print("Creating " + ciType + ": " + path)
+            ci = factory.configurationItem(path, ciType, props)
+            start = time.time()
+            repository.create(ci)
+            elapsed = time.time() - start
+            print("  Created (%.2f sec)" % elapsed)
+
+        createCi(TEST_BASE, "core.Directory")
+        appPath = TEST_BASE + "/App"
+        createCi(appPath, "udm.Application")
+        pkgPath = appPath + "/1.0"
+        createCi(pkgPath, "udm.DeploymentPackage")
+
+        print("")
+        print("Creating 50 file.File CIs...")
+        print("")
+
+        for i in range(50):
+            filePath = pkgPath + "/file-" + str(i)
+            createCi(filePath, "file.File", {"fileUri": "https://raw.githubusercontent.com/jythontools/jython/master/README.txt", "targetPath": "/tmp/test" + str(i)})
+
+        print("DONE")
+      owner: admin
+    - name: New task
+      type: jenkins.ScanMultibranchPipeline
+      jobName: test
+      variableMapping:
+        pythonScript.password: "${password}"
+  variables:
+  - type: xlrelease.StringVariable
+    key: pass
+    value: password
+  - type: xlrelease.PasswordStringVariable
+    key: password
+    requiresValue: false
+    showOnReleaseStart: false
+    label: Password
+    description: Overrides the password used to connect to the server
+    value: !value "xlrelease_PasswordStringVariable_password_value"
+  riskProfile: Default risk profile
+  author: admin
