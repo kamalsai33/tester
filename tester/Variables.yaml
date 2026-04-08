@@ -1,6 +1,6 @@
 # Exported from:        http://Sai_Kamal:5516/
 # Release version:      25.1.2-610.908
-# Date created:         Wed Apr 08 14:51:04 IST 2026
+# Date created:         Wed Apr 08 14:59:49 IST 2026
 
 ---
 apiVersion: xl-release/v1
@@ -13,3 +13,6 @@ spec:
   - type: xlrelease.StringVariable
     key: folder.pass
     value: "12345"
+  - type: xlrelease.PasswordStringVariable
+    key: folder.testpass
+    value: !value "xlrelease_PasswordStringVariable_folder_testpass_value"
