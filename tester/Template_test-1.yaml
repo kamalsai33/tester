@@ -1,0 +1,21 @@
+# Exported from:        http://Sai_Kamal:5516/
+# Release version:      25.1.2-610.908
+# Date created:         Wed Apr 08 14:48:26 IST 2026
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: tester
+spec:
+- template: test-1
+  scheduledStartDate: 2026-04-08T09:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: New task
+      type: jenkins.Build
+      password: !value "jenkins_Build_New_task_password"
+  riskProfile: Default risk profile
+  author: admin
