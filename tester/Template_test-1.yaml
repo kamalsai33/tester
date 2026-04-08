@@ -18,12 +18,5 @@ spec:
       type: jenkins.Build
       variableMapping:
         pythonScript.password: "${folder.testpass}"
-  variables:
-  - type: xlrelease.PasswordStringVariable
-    key: password
-    requiresValue: false
-    showOnReleaseStart: false
-    label: Password
-    description: Overrides the password used to connect to the server
   riskProfile: Default risk profile
   author: admin
