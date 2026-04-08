@@ -9,12 +9,7 @@ metadata:
   path: /
   home: tester
 spec:
-- template: test
-  scheduledStartDate: 2026-04-01T09:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: New task
-      type: xld.cli
-  riskProfile: Default risk profile
-  author: admin
+- folderVariables:
+  - type: xlrelease.StringVariable
+    key: folder.pass
+    value: "12345"
